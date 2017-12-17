@@ -20,3 +20,9 @@ Our submission for the Riot API challenge 2017. Actual name TBD.
 ```
 npm start
 ```
+
+### Before you commit
+
+```
+npm run lint
+```
