@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+        "lib": [
+            "es2017"
+        ],
         "noImplicitAny": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitReturns": true,
