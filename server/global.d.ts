@@ -10,6 +10,7 @@ interface PerkSet {
     perk3Id: number;
     perk4Id: number;
     perk5Id: number;
+    championId: number;
     matchId: number;
     win: boolean;
 }

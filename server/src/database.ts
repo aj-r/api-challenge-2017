@@ -85,6 +85,10 @@ class Database {
                     type: Sequelize.BIGINT,
                     allowNull: false,
                 },
+                championId: {
+                    type: Sequelize.BIGINT,
+                    allowNull: false,
+                },
                 matchId: {
                     type: Sequelize.BIGINT,
                     allowNull: false,
@@ -93,7 +97,8 @@ class Database {
                     type: Sequelize.BOOLEAN,
                     allowNull: false,
                 },
-            })));
+            }))
+            .then(model => model.sync()));
     }
 
     private matchesPromise: Promise<Sequelize.Model<MatchRecord, {}>>;
@@ -108,7 +113,8 @@ class Database {
                     type: Sequelize.JSONB,
                     allowNull: false,
                 },
-            })));
+            }))
+            .then(model => model.sync()));
     }
 
     private createDatabase = async (config: ClientConfig): Promise<void> => {
