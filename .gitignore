@@ -1,3 +1,6 @@
+pg-options.json
+pg-options.key
+
 # Logs
 logs
 *.log
