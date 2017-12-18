@@ -5,12 +5,13 @@ Our submission for the Riot API challenge 2017. Actual name TBD.
 
 ### Setup
 
-1. Open a terminal window in the `server` directory.
-2. Install npm dependencies:
+1. Install [PostgreSQL](https://www.postgresql.org/download/).
+2. Open a terminal window in the `server` directory.
+3. Install npm dependencies:
     ```
     npm install
     ```
-3. Set the postgres username/password:
+4. Set the postgres username/password:
     ```
     npm run pg-cred -- -u "username" -p "password"
     ```
@@ -19,6 +20,8 @@ Our submission for the Riot API challenge 2017. Actual name TBD.
 
 ```
 npm start
+# or, if you want to attach a debugger:
+npm run debug
 ```
 
 ### Before you commit
