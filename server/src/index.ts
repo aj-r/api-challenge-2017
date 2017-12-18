@@ -38,8 +38,8 @@ async function scrapeData() {
     ];
     const date = new Date();
     const endTime = date.valueOf();
-    date.setDate(date.getDate() - 7); // Maximum time range allowed is one week
-    const beginTime = date.valueOf();
+    date.setDate(date.getDate() - 7); // Maximum time range allowed by the API is one week
+    const beginTime = date.valueOf() + 1;
 
     const accountIds: { [id: string]: number } = {};
     const usedAccountIds: { [id: string]: number } = {};
@@ -60,9 +60,10 @@ async function scrapeData() {
         const accountId = Object.keys(accountIds)[0];
         let matches: any;
         try {
-            matches = await kayn.Matchlist.by.accountID(accountIds[accountId]).query({ beginTime, endTime });
+            // Use at most 4 games for any given summoner to mitigate skewed results
+            matches = await kayn.Matchlist.by.accountID(accountIds[accountId]).query({ beginTime, endTime, beginIndex: 0, endIndex: 4 });
         } catch (err) {
-            console.error(`Failed to get recent matches for account ID ${accountId}`, err);
+            console.error(`Failed to get recent matches for account ID ${accountId}: `, err);
         }
         usedAccountIds[accountId] = accountIds[accountId];
         delete accountIds[accountId];
@@ -126,9 +127,10 @@ async function scrapeData() {
                         }
                     }
                 }
-                for (const participant of match.participantIdentities)
-                    if (!(participant.player.accountId in usedAccountIds))
-                        accountIds[participant.player.accountId] = participant.player.accountId;
+                if (_.size(accountIds) < 1000) // Prevent infinite scaling to avoid using ridiculous amounts of heap data
+                    for (const participant of match.participantIdentities)
+                        if (!(participant.player.accountId in usedAccountIds))
+                            accountIds[participant.player.accountId] = participant.player.accountId;
             } catch (err) {
                 console.error(`Failed to load match id ${matchId}: `, err);
             }
