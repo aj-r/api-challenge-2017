@@ -101,6 +101,23 @@ class Database {
             .then(model => model.sync()));
     }
 
+    private perkFrequenciesPromise: Promise<Sequelize.Model<PerkFrequency, {}>>;
+    public perkFrequencies = () => {
+        return this.perkFrequenciesPromise || (this.perkFrequenciesPromise = this.initPromise.then(sequelize =>
+            sequelize.define<PerkFrequency, {}>("perkfrequency", {
+                id: {
+                    type: Sequelize.BIGINT,
+                    autoIncrement: false,
+                    primaryKey: true,
+                },
+                data: {
+                    type: Sequelize.JSONB,
+                    allowNull: false,
+                },
+            }))
+            .then(model => model.sync()));
+    }
+
     private matchesPromise: Promise<Sequelize.Model<MatchRecord, {}>>;
     public matches = () => {
         return this.matchesPromise || (this.matchesPromise = this.initPromise.then(sequelize =>

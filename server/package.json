@@ -28,12 +28,12 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
-    "@types/lodash-es": "^4.17.0",
+    "@types/lodash": "^4.14.91",
     "@types/pg": "^6.1.45",
     "@types/sequelize": "^4.0.79",
     "@types/yargs": "^10.0.0",
     "kayn": "^0.5.2",
-    "lodash-es": "^4.17.4",
+    "lodash": "^4.17.4",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.28.5",

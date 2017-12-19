@@ -15,6 +15,20 @@ interface PerkSet {
     win: boolean;
 }
 
+interface PerkMap {
+    [perkId: number]: PerkFrequency;
+}
+
+interface PerkFrequency {
+    id: number;
+    data: {
+        [perkId: number]: {
+            count: number;
+            champions: { [championId: number]: number };
+        }
+    }
+}
+
 interface MatchRecord {
     id: number;
     data: any;

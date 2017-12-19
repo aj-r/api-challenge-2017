@@ -1,5 +1,5 @@
 import { Kayn, REGIONS } from "kayn";
-import _ = require("lodash");
+import { includes, isEmpty, size } from "lodash";
 import database from "./database";
 import QUEUE from "./queue";
 
@@ -20,16 +20,14 @@ const seedDataFiles: SeedData[] = [
 const kayn = Kayn()({
     region: REGIONS.NORTH_AMERICA,
     debugOptions: {
-      isEnabled: true,
-      showKey: false,
+        isEnabled: true,
+        showKey: false,
     },
     cacheOptions: {
-      cache: null,
-      ttls: {},
+        cache: null,
+        ttls: {},
     },
 });
-
-console.info("gather loaded");
 
 async function gather() {
     console.info("gather started");
@@ -59,7 +57,7 @@ async function gather() {
                 accountIds[participant.player.accountId] = participant.player.accountId;
 
     // Loop through all of the accounts we know about and get their recent matches. Hopefully this loops indefinitely.
-    while (!_.isEmpty(accountIds)) {
+    while (!isEmpty(accountIds)) {
         const accountId = Object.keys(accountIds)[0];
         let matches: any;
         try {
@@ -73,7 +71,7 @@ async function gather() {
         if (!matches)
             continue;
         for (const matchRef of matches.matches) {
-            if (!_.includes(validQueues, matchRef.queue))
+            if (!includes(validQueues, matchRef.queue))
                 continue;
             const matchId = matchRef.gameId;
             if (!(matchId in usedMatchIds))
@@ -100,7 +98,7 @@ async function gather() {
                         id: matchId,
                         data: match,
                     };
-                    if (_.isEmpty(match.participants))
+                    if (isEmpty(match.participants))
                         continue;
                     const firstParticipant = match.participants[0];
                     if (!firstParticipant.stats || !firstParticipant.stats.perk0)
@@ -130,7 +128,7 @@ async function gather() {
                         }
                     }
                 }
-                if (_.size(accountIds) < 1000) // Prevent infinite scaling to avoid using ridiculous amounts of heap data
+                if (size(accountIds) < 1000) // Prevent infinite scaling to avoid using ridiculous amounts of heap data
                     for (const participant of match.participantIdentities)
                         if (!(participant.player.accountId in usedAccountIds))
                             accountIds[participant.player.accountId] = participant.player.accountId;
