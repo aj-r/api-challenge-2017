@@ -117,6 +117,21 @@ class Database {
             .then(model => model.sync()));
     }
 
+    public getAllPerkIds = async (): Promise<number[]> => {
+        const sequelize = await this.initPromise;
+        const query =
+            `select distinct "perkId" from (
+                select "perk0Id" as "perkId" from perksets
+                union
+                select "perk1Id" as "perkId" from perksets
+                union
+                select "perk2Id" as "perkId" from perksets
+                union
+                select "perk3Id" as "perkId" from perksets
+            ) as "perkIds"`;
+        return sequelize.query(query, { type: sequelize.QueryTypes.SELECT });
+    }
+
     private createDatabase = async (config: ClientConfig): Promise<void> => {
         if (!config.database)
             return;

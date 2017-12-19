@@ -4,11 +4,26 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch via NPM",
+            "name": "Gather data",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run-script",
-                "debug"
+                "debug",
+                "--",
+                "gather"
+            ],
+            "port": 9229
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Analyze data",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "debug",
+                "--",
+                "analyze"
             ],
             "port": 9229
         }

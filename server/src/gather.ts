@@ -1,14 +1,8 @@
-import yargs = require("yargs");
-import analyze from "./analyze";
-import gather from "./gather";
+import { Kayn, REGIONS } from "kayn";
+import _ = require("lodash");
+import database from "./database";
+import QUEUE from "./queue";
 
-// tslint:disable-next-line:no-unused-expression
-yargs
-    .command("gather", "Gather perk data from League games", {}, gather)
-    .command("analyze", "Analyze data to find pairings", {}, analyze)
-    .argv;
-
-/*
 // tslint:disable:no-var-requires
 const seedDataFiles: SeedData[] = [
     require("../seed-data/matches1.json"),
@@ -35,7 +29,10 @@ const kayn = Kayn()({
     },
 });
 
-async function scrapeData() {
+console.info("gather loaded");
+
+async function gather() {
+    console.info("gather started");
     const validQueues = [
         QUEUE.TB_BLIND_SUMMONERS_RIFT_5x5,
         QUEUE.TEAM_BUILDER_DRAFT_UNRANKED_5x5,
@@ -143,7 +140,7 @@ async function scrapeData() {
         }
     }
     console.warn("!!! Ran out of data! Need to re-seed somehow !!!");
-    database.close();
+    await database.close();
 }
 
-scrapeData();*/
+export default gather;
