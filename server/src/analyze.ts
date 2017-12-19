@@ -1,4 +1,6 @@
+import fs = require("fs");
 import { values } from "lodash";
+import path = require("path");
 import database from "./database";
 
 async function analyze() {
@@ -38,6 +40,21 @@ async function analyze() {
             }
         }
     }
+    const filePath = path.join(__dirname, "../../www/data/perkMap.json");
+    const dir = path.dirname(filePath);
+    console.info(`Saving results to the database and to ${filePath}`);
+    fs.mkdir(dir, err => {
+        if (err && err.code !== "EEXIST") {
+            console.error(`Failed to create directory ${dir}: ${err.message}`);
+            return;
+        }
+        fs.writeFile(filePath, JSON.stringify(perkMap), err2 => {
+            if (err2)
+                console.error(`Failed to save to ${filePath}: ${err2.message}`);
+            else
+                console.info(`Saved successfully to ${filePath}`);
+        });
+    });
     await dbPerkFrequencies.destroy({ where: {} }); // Delete all items
     await dbPerkFrequencies.bulkCreate(values(perkMap));
     await database.close();
