@@ -7,7 +7,9 @@ async function analyze() {
     const dbPerkSets = await database.perkSets();
     const dbPerkFrequencies = await database.perkFrequencies();
 
-    const perkSets = await dbPerkSets.findAll();
+    const perkSets = await dbPerkSets.findAll({
+        where: { win: true },
+    });
     const perkMap: PerkMap = {};
     const perkKeys = [
         "perk0Id" as "perk0Id",
@@ -57,6 +59,7 @@ async function analyze() {
     });
     await dbPerkFrequencies.destroy({ where: {} }); // Delete all items
     await dbPerkFrequencies.bulkCreate(values(perkMap));
+    console.info("Saved successfully to database.");
     await database.close();
 }
 
