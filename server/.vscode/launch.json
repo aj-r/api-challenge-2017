@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Gather data",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "debug",
+                "--",
+                "gather"
+            ],
+            "port": 9229
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Analyze data",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "debug",
+                "--",
+                "analyze"
+            ],
+            "port": 9229
+        }
+    ],
+    "compounds": []
+}

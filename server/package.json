@@ -1,0 +1,42 @@
+{
+  "name": "api-2017-server",
+  "version": "1.0.0",
+  "description": "Server side data scraper & processor",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node -r ts-node/register src/index.ts",
+    "debug": "node -r ts-node/register --nolazy --inspect-brk=9229 src/index.ts",
+    "gather": "node -r ts-node/register src/index.ts gather",
+    "analyze": "node -r ts-node/register src/index.ts analyze",
+    "lint": "tslint src/**/*.ts",
+    "pg-cred": "node -r ts-node/register pg-cred.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aj-r/api-challenge-2017.git"
+  },
+  "author": "KirkBerkley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aj-r/api-challenge-2017/issues"
+  },
+  "homepage": "https://github.com/aj-r/api-challenge-2017#readme",
+  "devDependencies": {
+    "ts-node": "^4.0.2",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.91",
+    "@types/pg": "^6.1.45",
+    "@types/sequelize": "^4.0.79",
+    "@types/yargs": "^10.0.0",
+    "kayn": "^0.5.2",
+    "lodash": "^4.17.4",
+    "pg": "^6.4.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.28.5",
+    "yargs": "^10.0.3"
+  }
+}
