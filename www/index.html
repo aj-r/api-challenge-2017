@@ -3,116 +3,133 @@
     <head>
         <title>Urf Runes</title>
         <link rel="stylesheet" href="styles.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="script.js"></script>
     </head>
     
     <body style="background-color:black">
         <h1 style="color:white; text-align:center">Urf Runes</h1>
         <div class="treeSelectorRow">
-            <img class="runeTreeIcon" src="img/runesReforged/perkStyle/8000.png"/>
-            <img class="runeTreeIcon" src="img/runesReforged/perkStyle/8100.png"/>
-            <img class="runeTreeIcon runeTreeIconSelected" src="img/runesReforged/perkStyle/8200.png"/>
-            <img class="runeTreeIcon" src="img/runesReforged/perkStyle/8300.png"/>
-            <img class="runeTreeIcon" src="img/runesReforged/perkStyle/8400.png"/>
+            <img id="precisionTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8000.png"/>
+            <img id="dominationTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8100.png"/>
+            <img id="sorceryTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8200.png"/>
+            <img id="resolveTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8300.png"/>
+            <img id="inspirationTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8400.png"/>
         </div>
-        <div class="runeRow">
-            <img class="keystoneRune" src="img/runesReforged/perk/8005.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8008.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8021.png"/>
+        
+        <div id="precisionTree" class="gone">
+            <div class="runeRow">
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8005.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8008.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8021.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/9101.png"/>
+                <img class="rune" src="img/runesReforged/perk/9111.png"/>
+                <img class="rune" src="img/runesReforged/perk/8009.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/9104.png"/>
+                <img class="rune" src="img/runesReforged/perk/9105.png"/>
+                <img class="rune" src="img/runesReforged/perk/9103.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8014.png"/>
+                <img class="rune" src="img/runesReforged/perk/8017.png"/>
+                <img class="rune" src="img/runesReforged/perk/8299.png"/>
+            </div>
         </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/9101.png"/>
-            <img class="rune" src="img/runesReforged/perk/9111.png"/>
-            <img class="rune" src="img/runesReforged/perk/8009.png"/>
+        
+        <div id="dominationTree" class="gone">
+            <div class="runeRow">
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8112.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8124.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8128.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8126.png"/>
+                <img class="rune" src="img/runesReforged/perk/8139.png"/>
+                <img class="rune" src="img/runesReforged/perk/8143.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8136.png"/>
+                <img class="rune" src="img/runesReforged/perk/8120.png"/>
+                <img class="rune" src="img/runesReforged/perk/8138.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8135.png"/>
+                <img class="rune" src="img/runesReforged/perk/8134.png"/>
+                <img class="rune" src="img/runesReforged/perk/8105.png"/>
+            </div>
         </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/9104.png"/>
-            <img class="rune" src="img/runesReforged/perk/9105.png"/>
-            <img class="rune" src="img/runesReforged/perk/9103.png"/>
+        
+        <div id="sorceryTree" class="gone">
+            <div class="runeRow">
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8214.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8229.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8230.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8224.png"/>
+                <img class="rune" src="img/runesReforged/perk/8226.png"/>
+                <img class="rune" src="img/runesReforged/perk/8243.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8210.png"/>
+                <img class="rune" src="img/runesReforged/perk/8234.png"/>
+                <img class="rune" src="img/runesReforged/perk/8233.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8237.png"/>
+                <img class="rune" src="img/runesReforged/perk/8232.png"/>
+                <img class="rune" src="img/runesReforged/perk/8236.png"/>
+            </div>
         </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8014.png"/>
-            <img class="rune" src="img/runesReforged/perk/8017.png"/>
-            <img class="rune" src="img/runesReforged/perk/8299.png"/>
+        
+        <div id="resolveTree" class="gone">
+            <div class="runeRow">
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8437.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8439.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8465.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8242.png"/>
+                <img class="rune" src="img/runesReforged/perk/8446.png"/>
+                <img class="rune" src="img/runesReforged/perk/8463.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8430.png"/>
+                <img class="rune" src="img/runesReforged/perk/8435.png"/>
+                <img class="rune" src="img/runesReforged/perk/8429.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8451.png"/>
+                <img class="rune" src="img/runesReforged/perk/8453.png"/>
+                <img class="rune" src="img/runesReforged/perk/8444.png"/>
+            </div>
         </div>
-        <div class="runeRow">
-            <img class="keystoneRune" src="img/runesReforged/perk/8112.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8124.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8128.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8126.png"/>
-            <img class="rune" src="img/runesReforged/perk/8139.png"/>
-            <img class="rune" src="img/runesReforged/perk/8143.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8136.png"/>
-            <img class="rune" src="img/runesReforged/perk/8120.png"/>
-            <img class="rune" src="img/runesReforged/perk/8138.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8135.png"/>
-            <img class="rune" src="img/runesReforged/perk/8134.png"/>
-            <img class="rune" src="img/runesReforged/perk/8105.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="keystoneRune" src="img/runesReforged/perk/8214.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8229.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8230.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8224.png"/>
-            <img class="rune" src="img/runesReforged/perk/8226.png"/>
-            <img class="rune" src="img/runesReforged/perk/8243.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8210.png"/>
-            <img class="rune" src="img/runesReforged/perk/8234.png"/>
-            <img class="rune" src="img/runesReforged/perk/8233.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8237.png"/>
-            <img class="rune" src="img/runesReforged/perk/8232.png"/>
-            <img class="rune" src="img/runesReforged/perk/8236.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="keystoneRune" src="img/runesReforged/perk/8437.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8439.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8465.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8242.png"/>
-            <img class="rune" src="img/runesReforged/perk/8446.png"/>
-            <img class="rune" src="img/runesReforged/perk/8463.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8430.png"/>
-            <img class="rune" src="img/runesReforged/perk/8435.png"/>
-            <img class="rune" src="img/runesReforged/perk/8429.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8451.png"/>
-            <img class="rune" src="img/runesReforged/perk/8453.png"/>
-            <img class="rune" src="img/runesReforged/perk/8444.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="keystoneRune" src="img/runesReforged/perk/8326.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8351.png"/>
-            <img class="keystoneRune" src="img/runesReforged/perk/8359.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8306.png"/>
-            <img class="rune" src="img/runesReforged/perk/8345.png"/>
-            <img class="rune" src="img/runesReforged/perk/8313.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8304.png"/>
-            <img class="rune" src="img/runesReforged/perk/8321.png"/>
-            <img class="rune" src="img/runesReforged/perk/8316.png"/>
-        </div>
-        <div class="runeRow">
-            <img class="rune" src="img/runesReforged/perk/8347.png"/>
-            <img class="rune" src="img/runesReforged/perk/8410.png"/>
-            <img class="rune" src="img/runesReforged/perk/8339.png"/>
+        
+        <div id="inspirationTree" class="gone">
+            <div class="runeRow">
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8326.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8351.png"/>
+                <img class="rune keystoneRune" src="img/runesReforged/perk/8359.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8306.png"/>
+                <img class="rune" src="img/runesReforged/perk/8345.png"/>
+                <img class="rune" src="img/runesReforged/perk/8313.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8304.png"/>
+                <img class="rune" src="img/runesReforged/perk/8321.png"/>
+                <img class="rune" src="img/runesReforged/perk/8316.png"/>
+            </div>
+            <div class="runeRow">
+                <img class="rune" src="img/runesReforged/perk/8347.png"/>
+                <img class="rune" src="img/runesReforged/perk/8410.png"/>
+                <img class="rune" src="img/runesReforged/perk/8339.png"/>
+            </div>
         </div>
     </body>
 </html>

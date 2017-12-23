@@ -2,11 +2,19 @@
     height: 75px;
     width: 75px;
     padding: 0px 12px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
-.keystoneRune {
+.runeHover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.rune.keystoneRune {
     height: 100px;
     width: 100px;
+    padding: 0px;
 }
 
 .runeRow {
@@ -29,7 +37,16 @@
     filter: grayscale(100%);
 }
 
-.runeTreeIconSelected {
+.runeTreeHover {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
+}
+
+.runeTreeIconSelected {
+    -webkit-filter: brightness(150%);
+    filter:brightness(150%);
+}
+
+.gone {
+    display: none;
 }
