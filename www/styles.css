@@ -11,6 +11,11 @@
     filter: grayscale(0%);
 }
 
+.runeSelected {
+    -webkit-filter: brightness(150%);
+    filter:brightness(150%);
+}
+
 .rune.keystoneRune {
     height: 100px;
     width: 100px;
