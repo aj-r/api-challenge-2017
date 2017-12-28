@@ -6,6 +6,14 @@
     filter: grayscale(100%);
 }
 
+.secondaryRune {
+    height: 75px;
+    width: 75px;
+    padding: 0px 12px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
 .runeHover {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);

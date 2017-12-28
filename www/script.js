@@ -5,6 +5,8 @@ resolveRunes = new Set([8437, 8439, 8465, 8242, 8446, 8463, 8430, 8435, 8429, 84
 inspirationRunes = new Set([8326, 8351, 8359, 8306, 8345, 8313, 8304, 8321, 8316, 8347, 8410, 8339])
 
 $(document).ready(function(){
+    var selectedPrimaryRune = 0;
+
     $('.runeTreeIcon').hover(
         function() {$(this).addClass('runeTreeHover')},
         function() {$(this).removeClass('runeTreeHover')});
@@ -21,6 +23,9 @@ $(document).ready(function(){
         $('#resolveTree').addClass('gone');
         $('#inspirationTree').addClass('gone');
         $('#mostCommonRune').addClass('gone');
+        $('.rune').removeClass('runeSelected');
+        $('#secondaryRunes').addClass('gone');
+        $('.secondaryRune').removeClass('runeSelected');
     }
         
     $('#precisionTreeSelector').click(
@@ -62,77 +67,138 @@ $(document).ready(function(){
         function() {$(this).addClass('runeHover')},
         function() {$(this).removeClass('runeHover')});
 
+    $('.secondaryRune').hover(
+        function() {$(this).addClass('runeHover')},
+        function() {$(this).removeClass('runeHover')});
+
     $('.rune').click(
         function() {
             $('.rune').removeClass('runeSelected');
+            $('.secondaryRune').removeClass('runeSelected');
             $(this).addClass('runeSelected');
 
-            var runeId = parseInt($(this).attr('id'));
-            var iteratePrecisionRunes = !(precisionRunes.has(runeId));
-            var iterateDominationRunes = !(dominationRunes.has(runeId));
-            var iterateSorceryRunes = !(sorceryRunes.has(runeId));
-            var iterateResolveRunes = !(resolveRunes.has(runeId));
-            var iterateInspirationRunes = !(inspirationRunes.has(runeId));
+            selectedPrimaryRune = parseInt($(this).attr('id'));
+            var iteratePrecisionRunes = !(precisionRunes.has(selectedPrimaryRune));
+            var iterateDominationRunes = !(dominationRunes.has(selectedPrimaryRune));
+            var iterateSorceryRunes = !(sorceryRunes.has(selectedPrimaryRune));
+            var iterateResolveRunes = !(resolveRunes.has(selectedPrimaryRune));
+            var iterateInspirationRunes = !(inspirationRunes.has(selectedPrimaryRune));
 
-            var max = 0;
-            var maxRuneId = 0;
+            var comparator = function(a, b) {
+                if (a[0] < b[0]) {
+                    return -1;
+                } else if (a[0] > b[0]) {
+                    return 1;
+                }
+                return 0;
+            }
+
+            // This will be sorted by max occurrences from least to greatest, and
+            // stores them as [number of occurrences, rune ID]
+            var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
             if (iteratePrecisionRunes) {
                 for (let precisionRuneId of precisionRunes.keys()) {
-                    if (data[runeId] && data[runeId].data[precisionRuneId]) {
-                        var count = data[runeId].data[precisionRuneId].count;
-                        if (count > max) {
-                            max = count;
-                            maxRuneId = precisionRuneId;
+                    if (data[selectedPrimaryRune] && data[selectedPrimaryRune].data[precisionRuneId]) {
+                        var count = data[selectedPrimaryRune].data[precisionRuneId].count;
+                        if (count > max[0][0]) {
+                            max.push([count, precisionRuneId]);
+                            max.sort(comparator);
+                            max.shift();
                         }
                     }
                 }
             }
             if (iterateDominationRunes) {
                 for (let dominationRuneId of dominationRunes.keys()) {
-                    if (data[runeId] && data[runeId].data[dominationRuneId]) {
-                        var count = data[runeId].data[dominationRuneId].count;
-                        if (count > max) {
-                            max = count;
-                            maxRuneId = dominationRuneId;
+                    if (data[selectedPrimaryRune] && data[selectedPrimaryRune].data[dominationRuneId]) {
+                        var count = data[selectedPrimaryRune].data[dominationRuneId].count;
+                        if (count > max[0][0]) {
+                            max.push([count, dominationRuneId]);
+                            max.sort(comparator);
+                            max.shift();
                         }
                     }
                 }
             }
             if (iterateSorceryRunes) {
                 for (let sorceryRuneId of sorceryRunes.keys()) {
-                    if (data[runeId] && data[runeId].data[sorceryRuneId]) {
-                        var count = data[runeId].data[sorceryRuneId].count;
-                        if (count > max) {
-                            max = count;
-                            maxRuneId = sorceryRuneId;
+                    if (data[selectedPrimaryRune] && data[selectedPrimaryRune].data[sorceryRuneId]) {
+                        var count = data[selectedPrimaryRune].data[sorceryRuneId].count;
+                        if (count > max[0][0]) {
+                            max.push([count, sorceryRuneId]);
+                            max.sort(comparator);
+                            max.shift();
                         }
                     }
                 }
             }
             if (iterateResolveRunes) {
                 for (let resolveRuneId of resolveRunes.keys()) {
-                    if (data[runeId] && data[runeId].data[resolveRuneId]) {
-                        var count = data[runeId].data[resolveRuneId].count;
-                        if (count > max) {
-                            max = count;
-                            maxRuneId = resolveRuneId;
+                    if (data[selectedPrimaryRune] && data[selectedPrimaryRune].data[resolveRuneId]) {
+                        var count = data[selectedPrimaryRune].data[resolveRuneId].count;
+                        if (count > max[0][0]) {
+                            max.push([count, resolveRuneId]);
+                            max.sort(comparator);
+                            max.shift();
                         }
                     }
                 }
             }
             if (iterateInspirationRunes) {
                 for (let inspirationRuneId of inspirationRunes.keys()) {
-                    if (data[runeId] && data[runeId].data[inspirationRuneId]) {
-                        var count = data[runeId].data[inspirationRuneId].count;
-                        if (count > max) {
-                            max = count;
-                            maxRuneId = inspirationRuneId;
+                    if (data[selectedPrimaryRune] && data[selectedPrimaryRune].data[inspirationRuneId]) {
+                        var count = data[selectedPrimaryRune].data[inspirationRuneId].count;
+                        if (count > max[0][0]) {
+                            max.push([count, inspirationRuneId]);
+                            max.sort(comparator);
+                            max.shift();
                         }
                     }
                 }
             }
 
-            $('#mostCommonRune').removeClass('gone');
-            $('#mostCommonRune').attr('src', 'img/runesReforged/perk/' + maxRuneId + '.png');
+            $('#secondaryRunes').removeClass('gone');
+            $('#mostCommonRune1').attr('src', 'img/runesReforged/perk/' + max[4][1] + '.png');
+            $('#mostCommonRune1').prop('runeId', max[4][1]);
+            $('#mostCommonRune2').attr('src', 'img/runesReforged/perk/' + max[3][1] + '.png');
+            $('#mostCommonRune2').prop('runeId', max[3][1]);
+            $('#mostCommonRune3').attr('src', 'img/runesReforged/perk/' + max[2][1] + '.png');
+            $('#mostCommonRune3').prop('runeId', max[2][1]);
+            $('#mostCommonRune4').attr('src', 'img/runesReforged/perk/' + max[1][1] + '.png');
+            $('#mostCommonRune4').prop('runeId', max[1][1]);
+            $('#mostCommonRune5').attr('src', 'img/runesReforged/perk/' + max[0][1] + '.png');
+            $('#mostCommonRune5').prop('runeId', max[0][1]);
+        });
+
+    $('.secondaryRune').click(
+        function() {
+            $('.secondaryRune').removeClass('runeSelected');
+            $(this).addClass('runeSelected');
+            var secondaryRuneId = parseInt($(this).prop('runeId'));
+
+            var comparator = function(a, b) {
+                if (a[0] < b[0]) {
+                    return -1;
+                } else if (a[0] > b[0]) {
+                    return 1;
+                }
+                return 0;
+            }
+
+            var championData = data[selectedPrimaryRune].data[secondaryRuneId].champions;
+            // This will be sorted by max occurrences from least to greatest, and
+            // stores them as [number of occurrences, champion ID]
+            var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
+
+            for (var championId in championData) {
+                var count = championData[championId];
+                if (count > max[0][0]) {
+                    max.push([count, championId]);
+                    max.sort(comparator);
+                    max.shift();
+                }
+            }
+
+            alert("" + max[4][1] + ", " + max[3][1] + ", " + max[2][1] + ", " + max[1][1] + ", " + max[0][1]);
         });
 });
