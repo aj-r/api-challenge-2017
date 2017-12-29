@@ -25,8 +25,10 @@ $(document).ready(function(){
         $('#mostCommonRune').addClass('gone');
         $('.rune').removeClass('runeSelected');
         $('#secondaryRunes').addClass('gone');
+        $('#secondaryRunesHeader').addClass('gone');
         $('.secondaryRune').removeClass('runeSelected');
         $('#champions').addClass('gone');
+        $('#championsHeader').addClass('gone');
     }
         
     $('#precisionTreeSelector').click(
@@ -78,6 +80,7 @@ $(document).ready(function(){
             $('.secondaryRune').removeClass('runeSelected');
             $(this).addClass('runeSelected');
             $('#champions').addClass('gone');
+            $('#championsHeader').addClass('gone');
 
             selectedPrimaryRune = parseInt($(this).attr('id'));
             var iteratePrecisionRunes = !(precisionRunes.has(selectedPrimaryRune));
@@ -160,6 +163,7 @@ $(document).ready(function(){
             }
 
             $('#secondaryRunes').removeClass('gone');
+            $('#secondaryRunesHeader').removeClass('gone');
             $('#mostCommonRune1').attr('src', 'img/runesReforged/perk/' + max[4][1] + '.png');
             $('#mostCommonRune1').prop('runeId', max[4][1]);
             $('#mostCommonRune2').attr('src', 'img/runesReforged/perk/' + max[3][1] + '.png');
@@ -202,6 +206,7 @@ $(document).ready(function(){
             }
 
             $('#champions').removeClass('gone');
+            $('#championsHeader').removeClass('gone');
             $('#mostCommonChampion1').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[max[4][1]] + '.png');
             $('#mostCommonChampion2').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[max[3][1]] + '.png');
             $('#mostCommonChampion3').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[max[2][1]] + '.png');
