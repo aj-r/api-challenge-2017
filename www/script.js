@@ -6,10 +6,6 @@ inspirationRunes = new Set([8326, 8351, 8359, 8306, 8345, 8313, 8304, 8321, 8316
 
 $(document).ready(function(){
     var selectedPrimaryRune = 0;
-
-    $('.runeTreeIcon').hover(
-        function() {$(this).addClass('runeTreeHover')},
-        function() {$(this).removeClass('runeTreeHover')});
         
     function onClickRuneTreeSelectorReset() {
         $('#precisionTreeSelector').removeClass('runeTreeIconSelected');
@@ -65,14 +61,6 @@ $(document).ready(function(){
             $('#inspirationTreeSelector').addClass('runeTreeIconSelected');
             $('#inspirationTree').removeClass('gone');
         });
-        
-    $('.rune').hover(
-        function() {$(this).addClass('runeHover')},
-        function() {$(this).removeClass('runeHover')});
-
-    $('.secondaryRune').hover(
-        function() {$(this).addClass('runeHover')},
-        function() {$(this).removeClass('runeHover')});
 
     $('.rune').click(
         function() {
