@@ -71,11 +71,13 @@
 }
 
 h1 {
-    color:white;
-    text-align:center;
+    color: white;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
 }
 
 h3 {
-    color:grey;
-    text-align:center;
+    color: grey;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
 }
