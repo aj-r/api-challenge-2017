@@ -53,16 +53,6 @@ $(document).ready(function(){
                         $('#secondaryRunesHeader').removeClass('gone');
                         var secondaryRuneIds = max.map(function (x) { return x[1]; }).reverse();
                         createSecondaryRunes(secondaryRuneIds);
-                        /*$('#mostCommonRune1').attr('src', 'img/runesReforged/perk/' + max[4][1] + '.png');
-                        $('#mostCommonRune1').prop('runeId', max[4][1]);
-                        $('#mostCommonRune2').attr('src', 'img/runesReforged/perk/' + max[3][1] + '.png');
-                        $('#mostCommonRune2').prop('runeId', max[3][1]);
-                        $('#mostCommonRune3').attr('src', 'img/runesReforged/perk/' + max[2][1] + '.png');
-                        $('#mostCommonRune3').prop('runeId', max[2][1]);
-                        $('#mostCommonRune4').attr('src', 'img/runesReforged/perk/' + max[1][1] + '.png');
-                        $('#mostCommonRune4').prop('runeId', max[1][1]);
-                        $('#mostCommonRune5').attr('src', 'img/runesReforged/perk/' + max[0][1] + '.png');
-                        $('#mostCommonRune5').prop('runeId', max[0][1]);*/
                     });
 
             });
@@ -71,7 +61,14 @@ $(document).ready(function(){
         runesRow.append(treeContainer);
         selector.click(
             function() {
-                onClickRuneTreeSelectorReset();
+                $('.runeTreeIconSelected').removeClass('runeTreeIconSelected');
+                $('.runeTree').addClass('gone');
+                $('.runeSelected').removeClass('runeSelected');
+                $('#secondaryRunes').addClass('gone');
+                $('#secondaryRunesHeader').addClass('gone');
+                $('#champions').addClass('gone');
+                $('#championsHeader').addClass('gone');
+
                 selector.addClass('runeTreeIconSelected');
                 treeContainer.removeClass('gone');
             });
@@ -86,17 +83,6 @@ $(document).ready(function(){
         runeContainer.find('.runeName').text(rune.name);
         runeContainer.find('.runeDescription').text(rune.description);
         return runeContainer;
-    }
-        
-    function onClickRuneTreeSelectorReset() {
-        $('.runeTreeIconSelected').removeClass('runeTreeIconSelected');
-        $('.runeTree').addClass('gone');
-        $('#mostCommonRune').addClass('gone');
-        $('.runeSelected').removeClass('runeSelected');
-        $('#secondaryRunes').addClass('gone');
-        $('#secondaryRunesHeader').addClass('gone');
-        $('#champions').addClass('gone');
-        $('#championsHeader').addClass('gone');
     }
 
     function getRuneById(id) {

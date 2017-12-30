@@ -1,9 +1,10 @@
 import fs = require("fs");
-import { values } from "lodash";
+import { orderBy, values } from "lodash";
 import path = require("path");
 import database from "./database";
 
 async function analyze() {
+    const resultSize = 5; // Keep the top n results for each pairing
     const dbPerkSets = await database.perkSets();
     const dbPerkFrequencies = await database.perkFrequencies();
 
@@ -42,7 +43,20 @@ async function analyze() {
             }
         }
     }
-    const filePath = path.join(__dirname, "../../www/data/perkMap.json");
+    for (const perkFrequency of values(perkMap)) {
+        const orderedPerkIds = orderBy(Object.keys(perkFrequency.data), perkId => perkFrequency.data[perkId as any].count, "desc");
+        // Remove the perks that don't make the cut
+        for (let i = resultSize; i < orderedPerkIds.length; ++i)
+            delete perkFrequency.data[orderedPerkIds[i] as any];
+
+        for (const perkPairing of values(perkFrequency.data)) {
+            const orderedChampIds = orderBy(Object.keys(perkPairing.champions), champId => perkPairing.champions[champId as any], "desc");
+            // Remove the champions that don't make the cut
+            for (let i = resultSize; i < orderedChampIds.length; ++i)
+                delete perkPairing.champions[orderedChampIds[i] as any];
+        }
+    }
+    const filePath = path.join(__dirname, "../../www/data/perkMap.js");
     const dir = path.dirname(filePath);
     console.info(`Saving results to the database and to ${filePath}`);
     fs.mkdir(dir, err => {
@@ -50,7 +64,7 @@ async function analyze() {
             console.error(`Failed to create directory ${dir}: ${err.message}`);
             return;
         }
-        fs.writeFile(filePath, JSON.stringify(perkMap), err2 => {
+        fs.writeFile(filePath, `data = ${JSON.stringify(perkMap)};`, err2 => {
             if (err2)
                 console.error(`Failed to save to ${filePath}: ${err2.message}`);
             else
