@@ -1,0 +1,13 @@
+{
+  "name": "urf-runes",
+  "version": "1.0.0",
+  "description": "Urf Runes",
+  "private": true,
+  "scripts": {
+    "start": "live-server"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  }
+}
