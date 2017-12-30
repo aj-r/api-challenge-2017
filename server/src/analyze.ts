@@ -4,8 +4,8 @@ import path = require("path");
 import database from "./database";
 
 async function analyze() {
-    const runePairingSize = 5; // Keep the top n results for each pairing
-    const champPairingSize = 5; // Keep the top n results for each pairing
+    const runePairingSize = 10000; // Keep the top n results for each pairing
+    const champPairingSize = 10000; // Keep the top n results for each pairing
     const dbPerkSets = await database.perkSets();
     const dbPerkFrequencies = await database.perkFrequencies();
 
