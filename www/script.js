@@ -39,8 +39,19 @@ $(document).ready(function(){
                         var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
 
                         for (var runeId in data[selectedPrimaryRune].data) {
-                            if (!data[selectedPrimaryRune].data.hasOwnProperty(runeId))
+                            //if (!data[selectedPrimaryRune].data.hasOwnProperty(runeId))
+                            //    continue;
+                            var sameTree = false;
+                            var runeIdInt = parseInt(runeId);
+                            for (let runeTree of runeTrees) {
+                                if (runeTree.runeIds.includes(selectedPrimaryRune) &&
+                                    runeTree.runeIds.includes(runeIdInt)) {
+                                    sameTree = true;
+                                }
+                            }
+                            if (sameTree) {
                                 continue;
+                            }
                             var count = data[selectedPrimaryRune].data[runeId].count;
                             if (count > max[0][0]) {
                                 max.push([count, runeId]);
