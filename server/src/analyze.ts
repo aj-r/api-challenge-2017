@@ -73,7 +73,9 @@ async function analyze() {
             }
         }
     }
-    const orderedPerkMap: OrderedPerkMap = {};
+    const orderedPerkMap: OrderedPerkMap = {
+        championCounts: championPopularity,
+    };
     for (const perkFrequency of values(perkMap)) {
         let orderedPerkIds = orderBy(Object.keys(perkFrequency.data).map(s => parseInt(s, 10)),
             perkId => getScore(perkFrequency.data[perkId], runePopularity[perkId]), "desc");
@@ -84,6 +86,7 @@ async function analyze() {
 
         orderedPerkMap[perkFrequency.id] = {
             perkId: perkFrequency.id,
+            count: runePopularity[perkFrequency.id],
             pairings: orderedPerkIds.map((perkId): OrderedPairingFrequency => ({
                 perkId,
                 count: perkFrequency.data[perkId].count,

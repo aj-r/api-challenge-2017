@@ -50,10 +50,13 @@ interface SeedData {
 
 interface OrderedPerkMap {
     [perkId: number]: OrderedPerkFrequency;
+    championCounts: { [championId: number]: number };
 }
 
 interface OrderedPerkFrequency {
     perkId: number;
+    /** Number of times this perk is used */
+    count: number;
     pairings: OrderedPairingFrequency[]
 }
 
