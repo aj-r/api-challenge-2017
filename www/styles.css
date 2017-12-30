@@ -181,3 +181,25 @@ h3 {
     color: grey;
     text-align: center;
 }
+
+#about {
+    margin-left: 15%;
+    margin-right: 15%;
+    position: absolute;
+    top: 940px;
+}
+
+.question {
+    font-size: 150%;
+}
+
+.answer {
+    font-size: 100%;
+    color: grey;
+}
+
+#disclaimer {
+    font-size: 70%;
+    text-align: center;
+    margin-top: 25px;
+}

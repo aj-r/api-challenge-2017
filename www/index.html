@@ -16,7 +16,7 @@
         <div class="treeSelectorRow"></div>
         <div class="runes"></div>
 
-        <h3 id="secondaryRunesHeader" class="gone">Next, select one of the runes most commonly played with your primary playstyle rune</h3>
+        <h3 id="secondaryRunesHeader" class="gone">Next, select one of the runes commonly played with your primary playstyle rune</h3>
         <div id="secondaryRunes" class="runeRow gone"></div>
         
         <template id="runeTemplate">
@@ -29,7 +29,7 @@
             </div>
         </template>
         
-        <h3 id="championsHeader" class="gone">These are the champions most frequently played with this combination of runes</h3>
+        <h3 id="championsHeader" class="gone">These are the champions recommended for this combination of runes</h3>
         <div id="champions" class="runeRow gone">
             <img id="mostCommonChampion1" class="champion"/>
             <img id="mostCommonChampion2" class="champion"/>
@@ -38,5 +38,26 @@
             <img id="mostCommonChampion5" class="champion"/>
         </div>
 
+        <div id="about">
+            <h1>About this Project</h1>
+            <p class="question">Who made this project?</p>
+            <p class="answer">Hi! We're KirkBerkley and RndmInternetMan! We're the same people who made <a href="http://red3141.github.io/UrfTunes/">Urf Tunes</a>.</p>
+            <p class="question">Why was this project made?</p>
+            <p class="answer">Urf Runes was made for the <a href="https://discussion.developer.riotgames.com/articles/4395/the-riot-games-api-challenge-2017.html">Riot Games API Challenge 2017</a>.</p>
+            <p class="question">So, what is Urf Runes?</p>
+            <p class="answer">Typically, when a League of Legends player queues up for a game, their first thought is about what role they want to play, then which champion they want to play, and then which runes to take on that champion.</p>
+            <p class="answer">When Riot re-did runes in Preseason 8, the runes they created were more about influencing a playstyle, rather than just being stat boosts. This means that it is now possible to approach Champion Select by first considering how you want to play and picking the runes you want to play, and picking your champion and role afterwards. We call this the Urftastic Runes-First (URF) approach.</p>
+            <p class="question">How does Urf Runes help with this Runes-First approach?</p>
+            <p class="answer">We've collected data from thousands of League of Legends games and, from that data, determined which runes go well together, and which champions go well with those pairs of runes. First, select a rune that matches the playstyle you want to use in your game. You'll then be shown a set of runes that are frequently paired with that rune. From that pair of runes, you can build the rest of your rune page. Selecting a secondary rune shows a set of champions that are frequently played with that pair of runes, if you need recommendations.</p>
+            <p class="question">How was it determined which pairs of runes go well together and which champions go well with those pairs of runes?</p>
+            <p class="answer">For all of the games we looked at, we counted each time every pair of runes won a game and which champion that pair of runes was used with. We only counted wins to ensure the rune and champion combinations we show are ones that have proven results (ie. we're not trolling you). We remove any pairs of runes from the same rune tree, to emphasize rune synergies that may be less obvious and more interesting. Finally, we reduce the rankings of combinations with extremely popular secondary runes or champions. This is to reduce the bias of popular runes and champions and to help ensure that our combinations are because they go well together, not just because each part is individually popular.</p>
+            <p class="question">Why do you only give a pair of runes and not a full rune page?</p>
+            <p class="answer">Runes Reforged is intended to be a dynamic rune system, with changes you can make on a per-game basis, depending on your lane matchup and other factors. We wanted to preserve that flexibility, while giving a starting point for a playstyle-based rune page.</p>
+            <p class="question">If you were to continue working on this project, what would you like to put more time into?</p>
+            <p class="answer">The biggest thing would be to improve the selection of the primary rune/secondary rune/champion combinations. As we mentioned in the last question, we've put some effort into trying to show meaningful combinations of runes and champions, but there's a lot more work that could be done there. We also think it would be useful if there was some way we could explain why the pairs of runes work well together.</p>
+            <p id="disclaimer">Urf Runes isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</p>
+        </div>
+        
+        
     </body>
 </html>
