@@ -3,7 +3,7 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
-.rune, .secondaryRune {
+.rune {
     height: 65px;
     width: 65px;
     padding: 0px 12px;
@@ -12,18 +12,7 @@ body {
     filter: grayscale(100%);
 }
 
-.champion {
-    height: 65px;
-    width: 65px;
-    padding: 0px 12px;
-}
-
 .rune:hover {
-    -webkit-filter: grayscale(0%);
-    filter: grayscale(0%);
-}
-
-.secondaryRune:hover {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
 }
@@ -38,6 +27,11 @@ body {
     height: 90px;
     width: 90px;
     padding: 0px;
+}
+
+#secondaryRunes .rune.keystoneRune {
+    position: relative;
+    top: -15px;
 }
 
 .treeSelectorRow {
@@ -78,6 +72,7 @@ body {
 .runeDetails {
     display: none;
     position: absolute;
+    pointer-events: none;
     top: 0;
     left: 100px;
     width: 250px;
@@ -92,6 +87,12 @@ body {
 }
 .runeContainer:hover .runeDetails {
     display: block;
+}
+
+.champion {
+    height: 65px;
+    width: 65px;
+    padding: 0px 12px;
 }
 
 .gone {
