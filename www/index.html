@@ -6,6 +6,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="data/perkMap.js"></script>
         <script src="data/championMap.js"></script>
+        <script src="data/runeTrees.js"></script>
         <script src="script.js"></script>
     </head>
 
@@ -13,13 +14,25 @@
         <h1>Urf Runes</h1>
         <h3>First, pick a primary playstyle rune</h3>
         <div class="treeSelectorRow">
+            <!--
             <img id="precisionTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8000.png"/>
             <img id="dominationTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8100.png"/>
             <img id="sorceryTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8200.png"/>
             <img id="resolveTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8300.png"/>
             <img id="inspirationTreeSelector" class="runeTreeIcon" src="img/runesReforged/perkStyle/8400.png"/>
+            -->
         </div>
-        
+        <div class="runes"></div>
+        <template id="runeTemplate">
+            <div class="runeContainer">
+                <img class="rune" />
+                <div class="runeDetails">
+                    <div class="runeName"></div>
+                    <div class="runeDetails"></div>
+                </div>
+            </div>
+        </template>
+        <!--
         <div id="precisionTree" class="gone">
             <div class="runeRow">
                 <img id="8005" class="rune keystoneRune" src="img/runesReforged/perk/8005.png"/>
@@ -40,7 +53,7 @@
                 <img id="8014" class="rune" src="img/runesReforged/perk/8014.png"/>
                 <img id="8017" class="rune" src="img/runesReforged/perk/8017.png"/>
                 <img id="8299" class="rune" src="img/runesReforged/perk/8299.png"/>
-            </div>
+       0     </div>
         </div>
         
         <div id="dominationTree" class="gone">
@@ -134,6 +147,7 @@
                 <img id="8339" class="rune" src="img/runesReforged/perk/8339.png"/>
             </div>
         </div>
+    -->
 
         <h3 id="secondaryRunesHeader" class="gone">Next, select one of the runes most commonly played with your primary playstyle rune</h3>
         <div id="secondaryRunes" class="runeRow gone">
@@ -152,5 +166,6 @@
             <img id="mostCommonChampion4" class="champion"/>
             <img id="mostCommonChampion5" class="champion"/>
         </div>
+
     </body>
 </html>
