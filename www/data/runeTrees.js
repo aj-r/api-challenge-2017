@@ -37,7 +37,7 @@ runeTrees = [
                 {
                     "id": 8009,
                     "name": "Presence of Mind",
-                    "description": "For 7s after gaining a level or takedown any mana you spend is fully restored."
+                    "description": "For 7s after gaining a level or takedown, any mana you spend is fully restored."
                 }
             ],
             [
@@ -131,7 +131,7 @@ runeTrees = [
                 {
                     "id": 8138,
                     "name": "Eyeball Collection",
-                    "description": "Collect eyeballs for champion and ward takedowns. Gain permanent AD or AP, adaptive, for each eyeball plus bonus upon collection completion."
+                    "description": "Collect eyeballs for champion and ward takedowns. Gain permanent AD or AP, adaptive, for each eyeball, plus bonus upon collection completion."
                 }
             ],
             [
@@ -275,12 +275,12 @@ runeTrees = [
                 {
                     "id": 8430,
                     "name": "Iron Skin",
-                    "description": "Gain +5 Armor.\nHeals, including consumables, increase your Armor by 5% temporarily."
+                    "description": "Gain +5 Armor. Heals, including consumables, increase your Armor by 5% temporarily."
                 },
                 {
                     "id": 8435,
                     "name": "Mirror Shell",
-                    "description": "Gain +6 Magic Resist.\nHeals, including consumables, increase your Magic Resist by 5% temporarily."
+                    "description": "Gain +6 Magic Resist. Heals, including consumables, increase your Magic Resist by 5% temporarily."
                 },
                 {
                     "id": 8429,
@@ -335,7 +335,7 @@ runeTrees = [
                 {
                     "id": 8306,
                     "name": "Hextech Flashtraption",
-                    "description": "While Flash is on cooldown it is replaced by Hexflash.\n\nHexflash: Channel, then blink to a new location."
+                    "description": "While Flash is on cooldown it is replaced by Hexflash. Hexflash: Channel, then blink to a new location."
                 },
                 {
                     "id": 8345,
@@ -345,7 +345,7 @@ runeTrees = [
                 {
                     "id": 8313,
                     "name": "Perfect Timing",
-                    "description": "Gain a free Stopwatch. Stopwatch has a one time use Stasis effect."
+                    "description": "Gain a free Stopwatch. Stopwatch has a one-time use Stasis effect."
                 }
             ],
             [
@@ -369,7 +369,7 @@ runeTrees = [
                 {
                     "id": 8347,
                     "name": "Cosmic Insight",
-                    "description": "+5% CDR\n+5% Max CDR\n+5% Summoner Spell CDR\n+5% Item CDR"
+                    "description": "+5% CDR, +5% Max CDR, +5% Summoner Spell CDR, +5% Item CDR"
                 },
                 {
                     "id": 8410,
@@ -379,7 +379,7 @@ runeTrees = [
                 {
                     "id": 8339,
                     "name": "Celestial Body",
-                    "description": "+100 Health permanently\n-10% damage to champions and monsters until 10 min"
+                    "description": "+100 Health permanently, -10% damage to champions and monsters until 10 min"
                 }
             ]
         ]
