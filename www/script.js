@@ -36,33 +36,20 @@ $(document).ready(function(){
 
                         // This will be sorted by max occurrences from least to greatest, and
                         // stores them as [number of occurrences, rune ID]
-                        var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
+                        /*var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
 
-                        for (var runeId in data[selectedPrimaryRune].data) {
-                            //if (!data[selectedPrimaryRune].data.hasOwnProperty(runeId))
-                            //    continue;
-                            var sameTree = false;
-                            var runeIdInt = parseInt(runeId);
-                            for (let runeTree of runeTrees) {
-                                if (runeTree.runeIds.indexOf(selectedPrimaryRune) !== -1 &&
-                                    runeTree.runeIds.indexOf(runeIdInt) !== -1) {
-                                    sameTree = true;
-                                }
-                            }
-                            if (sameTree) {
-                                //continue;
-                            }
-                            var score = data[selectedPrimaryRune].data[runeId].count;
+                        data[selectedPrimaryRune].pairings.forEach(function (pairing) {
+                            var score = pairing.count;
                             if (score > max[0][0]) {
-                                max.push([score, runeId]);
+                                max.push([score, pairing.perkId]);
                                 max.sort(comparator);
                                 max.shift();
                             }
-                        }
+                        });*/
 
                         $('#secondaryRunes').removeClass('gone');
                         $('#secondaryRunesHeader').removeClass('gone');
-                        var secondaryRuneIds = max.map(function (x) { return x[1]; }).reverse();
+                        var secondaryRuneIds = data[selectedPrimaryRune].pairings.map(function (p) { return p.perkId; });
                         createSecondaryRunes(secondaryRuneIds);
                     });
 
@@ -100,7 +87,7 @@ $(document).ready(function(){
         for (var i = 0; i < runeTrees.length; ++i)
             for (var j = 0; j < runeTrees[i].runes.length; ++j)
                 for (var k = 0; k < runeTrees[i].runes[j].length; ++k)
-                    if (runeTrees[i].runes[j][k].id == runeId) // Don't use === because we're matching numbers with strings here
+                    if (runeTrees[i].runes[j][k].id === runeId)
                         return [runeTrees[i].runes[j][k], runeTrees[i]];
         console.warn('Rune not found with ID: ', id);
         return undefined;
@@ -131,8 +118,13 @@ $(document).ready(function(){
                         }
                         return 0;
                     }
-        
-                    var championData = data[selectedPrimaryRune].data[secondaryRuneId].champions;
+
+                    var pairing;
+                    data[selectedPrimaryRune].pairings.forEach(function (p) {
+                        if (p.perkId === secondaryRuneId)
+                            pairing = p;
+                    });
+                    /*var championData = pairing.champions;
                     // This will be sorted by max occurrences from least to greatest, and
                     // stores them as [number of occurrences, champion ID]
                     var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
@@ -144,15 +136,15 @@ $(document).ready(function(){
                             max.sort(comparator);
                             max.shift();
                         }
-                    }
+                    }*/
         
                     $('#champions').removeClass('gone');
                     $('#championsHeader').removeClass('gone');
-                    $('#mostCommonChampion1').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[max[4][1]] + '.png');
-                    $('#mostCommonChampion2').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[max[3][1]] + '.png');
-                    $('#mostCommonChampion3').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[max[2][1]] + '.png');
-                    $('#mostCommonChampion4').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[max[1][1]] + '.png');
-                    $('#mostCommonChampion5').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[max[0][1]] + '.png');
+                    $('#mostCommonChampion1').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[pairing.champions[0].championId] + '.png');
+                    $('#mostCommonChampion2').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[pairing.champions[1].championId] + '.png');
+                    $('#mostCommonChampion3').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[pairing.champions[2].championId] + '.png');
+                    $('#mostCommonChampion4').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[pairing.champions[3].championId] + '.png');
+                    $('#mostCommonChampion5').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[pairing.champions[4].championId] + '.png');
                 });
         });
     }
