@@ -8,7 +8,8 @@ $(document).ready(function(){
     var runesRow = $('.runes');
     for (var i = 0; i < runeTrees.length; ++i) {
         //TODO: can we use let?
-        let selector = $('<img class="runeTreeIcon" src="img/runesReforged/perkStyle/8000.png"/>');
+        var runeTree = runeTrees[i];
+        let selector = $('<img class="runeTreeIcon" src="img/runesReforged/perkStyle/' + runeTree.perkStyleId + '.png" title="' + runeTree.name + '"/>');
         // TODO: add name / description for these, too. Maybe need another template.
         treeSelectorRow.append(selector);//TODO: is append correct?
         treeSelectors.push(selector);
@@ -16,7 +17,7 @@ $(document).ready(function(){
         let treeContainer = $('<div class="runeTree gone"></div>');
         let runes = [];
 
-        for (let runeList of runeTrees[i].runes) {
+        for (let runeList of runeTree.runes) {
             let runeRow = $('<div class="runeRow"></div>');
             for (let rune of runeList) {
                 let runeContainer = $(runeTemplate);

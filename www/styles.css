@@ -3,18 +3,11 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
-.rune {
+.rune, .secondaryRune {
     height: 65px;
     width: 65px;
     padding: 0px 12px;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-}
-
-.secondaryRune {
-    height: 65px;
-    width: 65px;
-    padding: 0px 12px;
+    cursor: pointer;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
@@ -36,6 +29,7 @@ body {
 }
 
 .runeSelected {
+    cursor: default;
     -webkit-filter: brightness(150%) !important;
     filter:brightness(150%) !important;
 }
@@ -62,6 +56,7 @@ body {
     height: 45px;
     width: 45px;
     padding: 0px 10px;
+    cursor: pointer;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
@@ -72,6 +67,7 @@ body {
 }
 
 .runeTreeIconSelected {
+    cursor: default;
     -webkit-filter: brightness(150%) !important;
     filter:brightness(150%) !important;
 }
