@@ -111,8 +111,7 @@ async function analyze() {
 }
 
 function getScore(pairing: PairingFrequency | ChampionFrequency, popularity: number) {
-    const f = Math.pow(popularity, 1);
-    return pairing.count / f;
+    return pairing.count / popularity;
 }
 
 export default analyze;
