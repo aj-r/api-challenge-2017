@@ -13,7 +13,7 @@ $(document).ready(function(){
         runeTree.runes.forEach(function (runeList) {
             var runeRow = $('<div class="runeRow"></div>');
             runeList.forEach(function (rune) {
-                var runeContainer = createRuneContainer(rune);
+                var runeContainer = createRuneContainer(rune, runeTree);
                 runeRow.append(runeContainer);
                             
                 runeContainer.find('.rune').click(
@@ -44,17 +44,17 @@ $(document).ready(function(){
                             var sameTree = false;
                             var runeIdInt = parseInt(runeId);
                             for (let runeTree of runeTrees) {
-                                if (runeTree.runeIds.includes(selectedPrimaryRune) &&
-                                    runeTree.runeIds.includes(runeIdInt)) {
+                                if (runeTree.runeIds.indexOf(selectedPrimaryRune) !== -1 &&
+                                    runeTree.runeIds.indexOf(runeIdInt) !== -1) {
                                     sameTree = true;
                                 }
                             }
                             if (sameTree) {
-                                continue;
+                                //continue;
                             }
-                            var count = data[selectedPrimaryRune].data[runeId].count;
-                            if (count > max[0][0]) {
-                                max.push([count, runeId]);
+                            var rate = data[selectedPrimaryRune].data[runeId].wins / data[selectedPrimaryRune].data[runeId].count;
+                            if (rate > max[0][0]) {
+                                max.push([rate, runeId]);
                                 max.sort(comparator);
                                 max.shift();
                             }
@@ -85,23 +85,23 @@ $(document).ready(function(){
             });
     });
 
-    function createRuneContainer(rune) {
+    function createRuneContainer(rune, runeTree) {
         var runeTemplate = $('#runeTemplate').html();
         var runeContainer = $(runeTemplate);
         runeContainer.find('.rune').attr('src', 'img/runesReforged/perk/' + rune.id + '.png');
         if (rune.keystone)
             runeContainer.find('.rune').addClass('keystoneRune');
-        runeContainer.find('.runeName').text(rune.name);
+        runeContainer.find('.runeName').text(rune.name + " (" + runeTree.name + ")");
         runeContainer.find('.runeDescription').text(rune.description);
         return runeContainer;
     }
 
-    function getRuneById(id) {
+    function getRuneAndTreeById(runeId) {
         for (var i = 0; i < runeTrees.length; ++i)
             for (var j = 0; j < runeTrees[i].runes.length; ++j)
                 for (var k = 0; k < runeTrees[i].runes[j].length; ++k)
-                    if (runeTrees[i].runes[j][k].id == id)
-                        return runeTrees[i].runes[j][k];
+                    if (runeTrees[i].runes[j][k].id == runeId) // Don't use === because we're matching numbers with strings here
+                        return [runeTrees[i].runes[j][k], runeTrees[i]];
         console.warn('Rune not found with ID: ', id);
         return undefined;
     }
@@ -110,10 +110,12 @@ $(document).ready(function(){
         $('#secondaryRunes').empty();
 
         ids.forEach(function (id) {
-            var rune = getRuneById(id);
-            if (!rune)
+            var runeAndTree = getRuneAndTreeById(id);
+            if (!runeAndTree)
                 return;
-            var runeContainer = createRuneContainer(rune);
+            var rune = runeAndTree[0];
+            var runeTree = runeAndTree[1];
+            var runeContainer = createRuneContainer(rune, runeTree);
             $('#secondaryRunes').append(runeContainer);
             runeContainer.find('.rune').click(
                 function() {
@@ -136,9 +138,9 @@ $(document).ready(function(){
                     var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
         
                     for (var championId in championData) {
-                        var count = championData[championId];
-                        if (count > max[0][0]) {
-                            max.push([count, championId]);
+                        var rate = championData[championId].wins / championData[championId].count;
+                        if (rate > max[0][0]) {
+                            max.push([rate, championId]);
                             max.sort(comparator);
                             max.shift();
                         }

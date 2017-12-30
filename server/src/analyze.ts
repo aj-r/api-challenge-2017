@@ -1,16 +1,15 @@
 import fs = require("fs");
-import { orderBy, values } from "lodash";
+import { flatten, orderBy, values } from "lodash";
 import path = require("path");
 import database from "./database";
 
 async function analyze() {
-    const resultSize = 5; // Keep the top n results for each pairing
+    const runePairingSize = 5; // Keep the top n results for each pairing
+    const champPairingSize = 5; // Keep the top n results for each pairing
     const dbPerkSets = await database.perkSets();
     const dbPerkFrequencies = await database.perkFrequencies();
 
-    const perkSets = await dbPerkSets.findAll({
-        where: { win: true },
-    });
+    const perkSets = await dbPerkSets.findAll();
     const perkMap: PerkMap = {};
     const perkKeys = [
         "perk0Id" as "perk0Id",
@@ -20,6 +19,10 @@ async function analyze() {
         "perk4Id" as "perk4Id",
         "perk5Id" as "perk5Id",
     ];
+    // tslint:disable-next-line:no-var-requires
+    //const runeTrees: RuneTree[] = require("../data/runeTrees.json");
+    //const runeGroups: Rune[][] = runeTrees.map(rt => flatten(rt.runes));
+
     for (const perkSet of perkSets) {
         for (const key of perkKeys) {
             const perkId = perkSet[key];
@@ -27,35 +30,49 @@ async function analyze() {
                 id: perkId,
                 data: {},
             });
+            // tslint:disable-next-line:triple-equals
+            /*const runeGroup = runeGroups.find(rg => rg.some(r => r.id == perkId));
+            if (!runeGroup) {
+                console.warn(`Rune ${key} was not found in any group! Something went wrong.`);
+                continue;
+            }*/
             for (const key2 of perkKeys) {
                 if (key2 === key)
                     continue;
+                //if (runeGroup.some(rg => rg.id === key))
+                //    continue;
                 const perkId2 = perkSet[key2];
                 const perkFrequencyItem = perkFrequency.data[perkId2] || (perkFrequency.data[perkId2] = {
                     count: 0,
+                    wins: 0,
                     champions: {},
                 });
+                const championItem = perkFrequencyItem.champions[perkSet.championId] || (perkFrequencyItem.champions[perkSet.championId] = {
+                    count: 0,
+                    wins: 0,
+                });
                 ++perkFrequencyItem.count;
-                if (perkFrequencyItem.champions[perkSet.championId])
-                    ++perkFrequencyItem.champions[perkSet.championId];
-                else
-                    perkFrequencyItem.champions[perkSet.championId] = 1;
+                ++championItem.count;
+                if (perkSet.win) {
+                    ++perkFrequencyItem.wins;
+                    ++championItem.wins;
+                }
             }
         }
     }
-    for (const perkFrequency of values(perkMap)) {
-        const orderedPerkIds = orderBy(Object.keys(perkFrequency.data), perkId => perkFrequency.data[perkId as any].count, "desc");
+    /*for (const perkFrequency of values(perkMap)) {
+        const orderedPerkIds = orderBy(Object.keys(perkFrequency.data), perkId => getWinRate(perkFrequency.data[perkId as any]), "desc");
         // Remove the perks that don't make the cut
-        for (let i = resultSize; i < orderedPerkIds.length; ++i)
+        for (let i = runePairingSize; i < orderedPerkIds.length; ++i)
             delete perkFrequency.data[orderedPerkIds[i] as any];
 
         for (const perkPairing of values(perkFrequency.data)) {
-            const orderedChampIds = orderBy(Object.keys(perkPairing.champions), champId => perkPairing.champions[champId as any], "desc");
+            const orderedChampIds = orderBy(Object.keys(perkPairing.champions), champId => getWinRate(perkPairing.champions[champId as any]), "desc");
             // Remove the champions that don't make the cut
-            for (let i = resultSize; i < orderedChampIds.length; ++i)
+            for (let i = champPairingSize; i < orderedChampIds.length; ++i)
                 delete perkPairing.champions[orderedChampIds[i] as any];
         }
-    }
+    }*/
     const filePath = path.join(__dirname, "../../www/data/perkMap.js");
     const dir = path.dirname(filePath);
     console.info(`Saving results to the database and to ${filePath}`);
@@ -75,6 +92,14 @@ async function analyze() {
     await dbPerkFrequencies.bulkCreate(values(perkMap));
     console.info("Saved successfully to database.");
     await database.close();
+}
+
+function getWinRate(pairing: PairingFrequency | ChampionFrequency) {
+    if (pairing.count < 10) {
+        // Too little data to get an accurate win rate. Ignore this pairing
+        return 0;
+    }
+    return pairing.wins / pairing.count;
 }
 
 export default analyze;

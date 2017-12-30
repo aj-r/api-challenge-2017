@@ -22,14 +22,23 @@ interface PerkMap {
 interface PerkFrequency {
     /** Perk ID */
     id: number;
-    data: {
-        [perkId: number]: {
-            /** Number of times this combination is used */
-            count: number;
-            /** Number of times each chamption is used with this combination. Should sum up to equal the count property. */
-            champions: { [championId: number]: number };
-        }
-    }
+    data: { [perkId: number]: PairingFrequency; }
+}
+
+interface PairingFrequency {
+    /** Number of times this combination is used */
+    count: number;
+    /** Number of wins when this combination is used */
+    wins: number;
+    /** Number of times each champion is used with this combination. Should sum up to equal the count property. */
+    champions: { [championId: number]: ChampionFrequency; };
+}
+
+interface ChampionFrequency {
+    /** Number of times this combination is used */
+    count: number;
+    /** Number of wins when this combination is used */
+    wins: number;
 }
 
 interface MatchRecord {
@@ -39,4 +48,17 @@ interface MatchRecord {
 
 interface SeedData {
     matches: any[];
+}
+
+interface RuneTree {
+    name: string;
+    perkStyleId: number;
+    runes: Rune[][];
+}
+
+interface Rune {
+    id: number;
+    name: string;
+    description: string;
+    keystone?: boolean;
 }
