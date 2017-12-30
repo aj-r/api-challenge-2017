@@ -1,15 +1,13 @@
-.rune {
-    height: 65px;
-    width: 65px;
-    padding: 0px 12px;
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+body {
+    color: white;
+    font-family: Helvetica, sans-serif;
 }
 
-.secondaryRune {
+.rune, .secondaryRune {
     height: 65px;
     width: 65px;
     padding: 0px 12px;
+    cursor: pointer;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
@@ -31,6 +29,7 @@
 }
 
 .runeSelected {
+    cursor: default;
     -webkit-filter: brightness(150%) !important;
     filter:brightness(150%) !important;
 }
@@ -41,22 +40,23 @@
     padding: 0px;
 }
 
-.runeRow {
-    display: flex;
-    justify-content: center;
-    padding: 12px 0px;
-}
-
 .treeSelectorRow {
     display: flex;
     justify-content: center;
     padding: 10px 0px 20px 0px;
 }
 
+.runeRow {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0px;
+}
+
 .runeTreeIcon {
     height: 45px;
     width: 45px;
     padding: 0px 10px;
+    cursor: pointer;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
@@ -67,8 +67,31 @@
 }
 
 .runeTreeIconSelected {
+    cursor: default;
     -webkit-filter: brightness(150%) !important;
     filter:brightness(150%) !important;
+}
+
+.runeContainer {
+    position: relative; /* All "absolute" positioned children should actually be relative to this element */
+}
+.runeDetails {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100px;
+    width: 250px;
+    padding: 10px;
+    background: gray;
+    color: white;
+    z-index: 100;
+}
+.runeName {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.runeContainer:hover .runeDetails {
+    display: block;
 }
 
 .gone {
@@ -76,13 +99,10 @@
 }
 
 h1 {
-    color: white;
     text-align: center;
-    font-family: Helvetica, sans-serif;
 }
 
 h3 {
     color: grey;
     text-align: center;
-    font-family: Helvetica, sans-serif;
 }
