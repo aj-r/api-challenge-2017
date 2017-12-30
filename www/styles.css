@@ -23,10 +23,15 @@ body {
     filter:brightness(150%) !important;
 }
 
-.runes .rune.keystoneRune {
+.rune.keystoneRune {
     height: 90px;
     width: 90px;
     padding: 0px;
+}
+
+#secondaryRunes .rune.keystoneRune {
+    position: relative;
+    top: -15px;
 }
 
 .treeSelectorRow {
