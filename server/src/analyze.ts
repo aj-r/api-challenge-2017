@@ -22,14 +22,17 @@ async function analyze() {
         "perk5Id" as "perk5Id",
     ];
     // tslint:disable-next-line:no-var-requires
-    //const runeTrees: RuneTree[] = require("../data/runeTrees.json");
-    //const runeGroups: Rune[][] = runeTrees.map(rt => flatten(rt.runes));
+    const runeTrees: RuneTree[] = require("../data/runeTrees.json");
+    const runeGroups: Rune[][] = runeTrees.map(rt => flatten(rt.runes));
 
     const runePopularity: { [runeId: number]: number } = {};
     const championPopularity: { [champId: number]: number } = {};
     for (const perkSet of perkSets) {
 
-        ++championPopularity[perkSet.championId];
+        if (championPopularity[perkSet.championId])
+            ++championPopularity[perkSet.championId];
+        else
+            championPopularity[perkSet.championId] = 1;
 
         for (const key of perkKeys) {
             const perkId = perkSet[key];
@@ -38,19 +41,23 @@ async function analyze() {
                 data: {},
             });
             // tslint:disable-next-line:triple-equals
-            /*const runeGroup = runeGroups.find(rg => rg.some(r => r.id == perkId));
+            const runeGroup = runeGroups.find(rg => rg.some(r => r.id == perkId));
             if (!runeGroup) {
                 console.warn(`Rune ${key} was not found in any group! Something went wrong.`);
                 continue;
-            }*/
-            ++runePopularity[perkId];
+            }
+            if (runePopularity[perkId])
+                ++runePopularity[perkId];
+            else
+                runePopularity[perkId] = 1;
 
             for (const key2 of perkKeys) {
                 if (key2 === key)
                     continue;
-                //if (runeGroup.some(rg => rg.id === key))
-                //    continue;
                 const perkId2 = perkSet[key2];
+                // tslint:disable-next-line:triple-equals
+                if (runeGroup.some(rg => rg.id == perkId2))
+                    continue;
                 const perkFrequencyItem = perkFrequency.data[perkId2] || (perkFrequency.data[perkId2] = {
                     count: 0,
                     wins: 0,
@@ -104,7 +111,8 @@ async function analyze() {
 }
 
 function getScore(pairing: PairingFrequency | ChampionFrequency, popularity: number) {
-    return pairing.count / popularity;
+    const f = Math.pow(popularity, 1);
+    return pairing.count / f;
 }
 
 export default analyze;
