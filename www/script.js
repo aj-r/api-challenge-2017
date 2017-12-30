@@ -34,19 +34,6 @@ $(document).ready(function(){
                             return 0;
                         }
 
-                        // This will be sorted by max occurrences from least to greatest, and
-                        // stores them as [number of occurrences, rune ID]
-                        /*var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
-
-                        data[selectedPrimaryRune].pairings.forEach(function (pairing) {
-                            var score = pairing.count;
-                            if (score > max[0][0]) {
-                                max.push([score, pairing.perkId]);
-                                max.sort(comparator);
-                                max.shift();
-                            }
-                        });*/
-
                         $('#secondaryRunes').removeClass('gone');
                         $('#secondaryRunesHeader').removeClass('gone');
                         var secondaryRuneIds = data[selectedPrimaryRune].pairings.map(function (p) { return p.perkId; });
@@ -124,19 +111,6 @@ $(document).ready(function(){
                         if (p.perkId === secondaryRuneId)
                             pairing = p;
                     });
-                    /*var championData = pairing.champions;
-                    // This will be sorted by max occurrences from least to greatest, and
-                    // stores them as [number of occurrences, champion ID]
-                    var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
-        
-                    for (var championId in championData) {
-                        var score = championData[championId].count;
-                        if (score > max[0][0]) {
-                            max.push([score, championId]);
-                            max.sort(comparator);
-                            max.shift();
-                        }
-                    }*/
         
                     $('#champions').removeClass('gone');
                     $('#championsHeader').removeClass('gone');
