@@ -3,24 +3,25 @@ $(document).ready(function(){
     var trees = [];
     var selectedPrimaryRune = 0;
 
-    var runeTemplate = $('#runeTemplate').html();//TODO: is this inner or outer? Need inner. Or just clone the children?
+    var runeTemplate = $('#runeTemplate').html();
     var treeSelectorRow = $('.treeSelectorRow');
     var runesRow = $('.runes');
     for (var i = 0; i < runeTrees.length; ++i) {
-        //TODO: can we use let?
         var runeTree = runeTrees[i];
-        let selector = $('<img class="runeTreeIcon" src="img/runesReforged/perkStyle/' + runeTree.perkStyleId + '.png" title="' + runeTree.name + '"/>');
+        var selector = $('<img class="runeTreeIcon" src="img/runesReforged/perkStyle/' + runeTree.perkStyleId + '.png" title="' + runeTree.name + '"/>');
         // TODO: add name / description for these, too. Maybe need another template.
-        treeSelectorRow.append(selector);//TODO: is append correct?
+        treeSelectorRow.append(selector);
         treeSelectors.push(selector);
 
-        let treeContainer = $('<div class="runeTree gone"></div>');
-        let runes = [];
+        var treeContainer = $('<div class="runeTree gone"></div>');
+        var runes = [];
 
-        for (let runeList of runeTree.runes) {
-            let runeRow = $('<div class="runeRow"></div>');
-            for (let rune of runeList) {
-                let runeContainer = $(runeTemplate);
+        for (var j = 0; j < runeTree.runes.length; ++j) {
+            var runeList = runeTree.runes[j];
+            var runeRow = $('<div class="runeRow"></div>');
+            for (var k = 0; k < runeList.length; ++k) {
+                var rune = runeList[k];
+                var runeContainer = $(runeTemplate);
                 runeContainer.find('.rune')
                     .attr('id', rune.id)
                     .attr('src', 'img/runesReforged/perk/' + rune.id + '.png');
@@ -38,7 +39,10 @@ $(document).ready(function(){
             container: treeContainer,
             runes: runes,
         });
-        
+        addClickHandler(selector, treeContainer);
+    }
+
+    function addClickHandler(selector, treeContainer) {
         selector.click(
             function() {
                 onClickRuneTreeSelectorReset();
