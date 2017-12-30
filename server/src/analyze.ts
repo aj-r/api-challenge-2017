@@ -9,7 +9,9 @@ async function analyze() {
     const dbPerkSets = await database.perkSets();
     const dbPerkFrequencies = await database.perkFrequencies();
 
-    const perkSets = await dbPerkSets.findAll();
+    const perkSets = await dbPerkSets.findAll({
+        where: { win: true },
+    });
     const perkMap: PerkMap = {};
     const perkKeys = [
         "perk0Id" as "perk0Id",
@@ -23,7 +25,12 @@ async function analyze() {
     //const runeTrees: RuneTree[] = require("../data/runeTrees.json");
     //const runeGroups: Rune[][] = runeTrees.map(rt => flatten(rt.runes));
 
+    const runePopularity: { [runeId: number]: number } = {};
+    const championPopularity: { [champId: number]: number } = {};
     for (const perkSet of perkSets) {
+
+        ++championPopularity[perkSet.championId];
+
         for (const key of perkKeys) {
             const perkId = perkSet[key];
             const perkFrequency = perkMap[perkId] || (perkMap[perkId] = {
@@ -36,6 +43,8 @@ async function analyze() {
                 console.warn(`Rune ${key} was not found in any group! Something went wrong.`);
                 continue;
             }*/
+            ++runePopularity[perkId];
+
             for (const key2 of perkKeys) {
                 if (key2 === key)
                     continue;
@@ -60,19 +69,19 @@ async function analyze() {
             }
         }
     }
-    /*for (const perkFrequency of values(perkMap)) {
-        const orderedPerkIds = orderBy(Object.keys(perkFrequency.data), perkId => getWinRate(perkFrequency.data[perkId as any]), "desc");
+    for (const perkFrequency of values(perkMap)) {
+        const orderedPerkIds = orderBy(Object.keys(perkFrequency.data), (perkId: number) => getScore(perkFrequency.data[perkId], runePopularity[perkId]), "desc");
         // Remove the perks that don't make the cut
         for (let i = runePairingSize; i < orderedPerkIds.length; ++i)
             delete perkFrequency.data[orderedPerkIds[i] as any];
 
         for (const perkPairing of values(perkFrequency.data)) {
-            const orderedChampIds = orderBy(Object.keys(perkPairing.champions), champId => getWinRate(perkPairing.champions[champId as any]), "desc");
+            const orderedChampIds = orderBy(Object.keys(perkPairing.champions), (champId: number) => getScore(perkPairing.champions[champId], championPopularity[champId]), "desc");
             // Remove the champions that don't make the cut
             for (let i = champPairingSize; i < orderedChampIds.length; ++i)
                 delete perkPairing.champions[orderedChampIds[i] as any];
         }
-    }*/
+    }
     const filePath = path.join(__dirname, "../../www/data/perkMap.js");
     const dir = path.dirname(filePath);
     console.info(`Saving results to the database and to ${filePath}`);
@@ -94,12 +103,8 @@ async function analyze() {
     await database.close();
 }
 
-function getWinRate(pairing: PairingFrequency | ChampionFrequency) {
-    if (pairing.count < 10) {
-        // Too little data to get an accurate win rate. Ignore this pairing
-        return 0;
-    }
-    return pairing.wins / pairing.count;
+function getScore(pairing: PairingFrequency | ChampionFrequency, popularity: number) {
+    return pairing.count / popularity;
 }
 
 export default analyze;

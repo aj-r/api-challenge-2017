@@ -52,9 +52,9 @@ $(document).ready(function(){
                             if (sameTree) {
                                 //continue;
                             }
-                            var rate = data[selectedPrimaryRune].data[runeId].wins / data[selectedPrimaryRune].data[runeId].count;
-                            if (rate > max[0][0]) {
-                                max.push([rate, runeId]);
+                            var score = data[selectedPrimaryRune].data[runeId].count;
+                            if (score > max[0][0]) {
+                                max.push([score, runeId]);
                                 max.sort(comparator);
                                 max.shift();
                             }
@@ -138,9 +138,9 @@ $(document).ready(function(){
                     var max = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]];
         
                     for (var championId in championData) {
-                        var rate = championData[championId].wins / championData[championId].count;
-                        if (rate > max[0][0]) {
-                            max.push([rate, championId]);
+                        var score = championData[championId].count;
+                        if (score > max[0][0]) {
+                            max.push([score, championId]);
                             max.sort(comparator);
                             max.shift();
                         }
