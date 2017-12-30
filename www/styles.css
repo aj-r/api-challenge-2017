@@ -1,0 +1,88 @@
+.rune {
+    height: 65px;
+    width: 65px;
+    padding: 0px 12px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.secondaryRune {
+    height: 65px;
+    width: 65px;
+    padding: 0px 12px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.champion {
+    height: 65px;
+    width: 65px;
+    padding: 0px 12px;
+}
+
+.rune:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.secondaryRune:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.runeSelected {
+    -webkit-filter: brightness(150%) !important;
+    filter:brightness(150%) !important;
+}
+
+.rune.keystoneRune {
+    height: 90px;
+    width: 90px;
+    padding: 0px;
+}
+
+.runeRow {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0px;
+}
+
+.treeSelectorRow {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px 20px 0px;
+}
+
+.runeTreeIcon {
+    height: 45px;
+    width: 45px;
+    padding: 0px 10px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.runeTreeIcon:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.runeTreeIconSelected {
+    -webkit-filter: brightness(150%) !important;
+    filter:brightness(150%) !important;
+}
+
+.gone {
+    display: none;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+}
+
+h3 {
+    color: grey;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+}
