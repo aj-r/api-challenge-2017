@@ -62,6 +62,7 @@ $(document).ready(function(){
     function createRuneContainer(rune, runeTree) {
         var runeTemplate = $('#runeTemplate').html();
         var runeContainer = $(runeTemplate);
+        runeContainer.addClass(runeTree.name.toLowerCase() + "Rune");
         runeContainer.find('.rune').attr('src', 'img/runesReforged/perk/' + rune.id + '.png');
         if (rune.keystone)
             runeContainer.find('.rune').addClass('keystoneRune');

@@ -70,23 +70,97 @@ body {
     position: relative; /* All "absolute" positioned children should actually be relative to this element */
 }
 .runeDetails {
-    display: none;
     position: absolute;
     pointer-events: none;
     top: 0;
     left: 100px;
     width: 250px;
     padding: 10px;
-    background: gray;
+    border: 1px #999999 solid;
+    background: #333333;
     color: white;
     z-index: 100;
+    
+    opacity: 0;
+    transition: opacity 0.3s;
 }
+.runeDetails::before {
+    border: 12px solid;
+    border-color: transparent;
+    border-right-color: #999999;
+    display: block;
+    position: absolute;
+    left: -24px;
+    top: 18px;
+    z-index: 10;
+
+    content: '';
+    width: 0;
+    height: 0;
+}
+.runeDetails::after {
+    border: 10px solid;
+    border-color: transparent;
+    border-right-color: #333333;
+    display: block;
+    position: absolute;
+    left: -20px;
+    top: 20px;
+    z-index: 11;
+
+    content: '';
+    width: 0;
+    height: 0;
+}
+.keystoneRune + .runeDetails::before {
+    top: 28px;
+}
+.keystoneRune + .runeDetails::after {
+    top: 30px;
+}
+
+
 .runeName {
     font-weight: bold;
     margin-bottom: 10px;
 }
 .runeContainer:hover .runeDetails {
-    display: block;
+    opacity: 0.9;
+}
+
+.precisionRune .runeDetails {
+    background: hsl(32, 29%, 25%);
+}
+.precisionRune .runeDetails::after {
+    border-right-color: hsl(32, 29%, 25%);
+}
+
+.dominationRune .runeDetails {
+    background: hsl(353, 26%, 25%);
+}
+.dominationRune .runeDetails::after {
+    border-right-color: hsl(353, 26%, 25%);
+}
+
+.sorceryRune .runeDetails {
+    background: hsl(255, 41%, 24%);
+}
+.sorceryRune .runeDetails::after {
+    border-right-color: hsl(255, 41%, 24%);
+}
+
+.resolveRune .runeDetails {
+    background: hsl(118, 26%, 24%);
+}
+.resolveRune .runeDetails::after {
+    border-right-color: hsl(118, 26%, 24%);
+}
+
+.inspirationRune .runeDetails {
+    background: hsl(191, 26%, 25%);
+}
+.inspirationRune .runeDetails::after {
+    border-right-color: hsl(191, 26%, 25%);
 }
 
 .champion {
