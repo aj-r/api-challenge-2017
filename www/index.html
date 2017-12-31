@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Urf Runes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="data/perkMap.js"></script>
@@ -14,10 +15,10 @@
         <h1>Urf Runes</h1>
         <h3>First, pick a primary playstyle rune</h3>
         <div class="treeSelectorRow"></div>
-        <div class="runes"></div>
+        <div id="runes" class="hidden"></div>
 
-        <h3 id="secondaryRunesHeader" class="gone">Next, select one of the runes commonly played with your primary playstyle rune</h3>
-        <div id="secondaryRunes" class="runeRow gone"></div>
+        <h3 id="secondaryRunesHeader" class="hidden">Next, select one of the runes commonly played with your primary playstyle rune</h3>
+        <div id="secondaryRunes" class="runeRow hidden"></div>
         
         <template id="runeTemplate">
             <div class="runeContainer">
@@ -29,8 +30,8 @@
             </div>
         </template>
         
-        <h3 id="championsHeader" class="gone">These are the champions recommended for this combination of runes</h3>
-        <div id="champions" class="runeRow gone">
+        <h3 id="championsHeader" class="hidden">These are the champions recommended for this combination of runes</h3>
+        <div id="champions" class="runeRow hidden">
             <img id="mostCommonChampion1" class="champion"/>
             <img id="mostCommonChampion2" class="champion"/>
             <img id="mostCommonChampion3" class="champion"/>

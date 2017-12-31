@@ -2,7 +2,7 @@ $(document).ready(function(){
     var selectedPrimaryRune = 0;
 
     var treeSelectorRow = $('.treeSelectorRow');
-    var runesRow = $('.runes');
+    var runesRow = $('#runes');
     runeTrees.forEach(function (runeTree) {
         var selector = $('<img class="runeTreeIcon" src="img/runesReforged/perkStyle/' + runeTree.perkStyleId + '.png" title="' + runeTree.name + '"/>');
         // TODO: add name / description for these, too. Maybe need another template.
@@ -20,8 +20,8 @@ $(document).ready(function(){
                     function() {
                         $('.runeSelected').removeClass('runeSelected');
                         $(this).addClass('runeSelected');
-                        $('#champions').addClass('gone');
-                        $('#championsHeader').addClass('gone');
+                        $('#champions').addClass('hidden');
+                        $('#championsHeader').addClass('hidden');
 
                         selectedPrimaryRune = rune.id;
 
@@ -34,8 +34,8 @@ $(document).ready(function(){
                             return 0;
                         }
 
-                        $('#secondaryRunes').removeClass('gone');
-                        $('#secondaryRunesHeader').removeClass('gone');
+                        $('#secondaryRunes').removeClass('hidden');
+                        $('#secondaryRunesHeader').removeClass('hidden');
                         var secondaryRuneIds = data[selectedPrimaryRune].pairings.map(function (p) { return p.perkId; });
                         createSecondaryRunes(secondaryRuneIds);
                     });
@@ -49,12 +49,13 @@ $(document).ready(function(){
                 $('.runeTreeIconSelected').removeClass('runeTreeIconSelected');
                 $('.runeTree').addClass('gone');
                 $('.runeSelected').removeClass('runeSelected');
-                $('#secondaryRunes').addClass('gone');
-                $('#secondaryRunesHeader').addClass('gone');
-                $('#champions').addClass('gone');
-                $('#championsHeader').addClass('gone');
+                $('#secondaryRunes').addClass('hidden');
+                $('#secondaryRunesHeader').addClass('hidden');
+                $('#champions').addClass('hidden');
+                $('#championsHeader').addClass('hidden');
 
                 selector.addClass('runeTreeIconSelected');
+                runesRow.removeClass('hidden');
                 treeContainer.removeClass('gone');
             });
     });
@@ -113,8 +114,8 @@ $(document).ready(function(){
                             pairing = p;
                     });
         
-                    $('#champions').removeClass('gone');
-                    $('#championsHeader').removeClass('gone');
+                    $('#champions').removeClass('hidden');
+                    $('#championsHeader').removeClass('hidden');
                     $('#mostCommonChampion1').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[pairing.champions[0].championId] + '.png');
                     $('#mostCommonChampion2').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[pairing.champions[1].championId] + '.png');
                     $('#mostCommonChampion3').attr('src', 'https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/' + championMap[pairing.champions[2].championId] + '.png');

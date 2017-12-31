@@ -3,6 +3,10 @@ body {
     font-family: Helvetica, sans-serif;
 }
 
+#runes {
+    min-height: 400px;
+}
+
 .rune {
     height: 65px;
     width: 65px;
@@ -27,6 +31,14 @@ body {
     height: 90px;
     width: 90px;
     padding: 0px;
+}
+
+#secondaryRunes, #champions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 #secondaryRunes .rune.keystoneRune {
@@ -165,12 +177,15 @@ body {
 
 .champion {
     height: 65px;
-    width: 65px;
     padding: 0px 12px;
 }
 
 .gone {
     display: none;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 h1 {
@@ -185,8 +200,7 @@ h3 {
 #about {
     margin-left: 15%;
     margin-right: 15%;
-    position: absolute;
-    top: 940px;
+    margin-top: 60px;
 }
 
 .question {
