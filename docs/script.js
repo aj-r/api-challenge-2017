@@ -15,7 +15,7 @@ $(document).ready(function(){
             runeList.forEach(function (rune) {
                 var runeContainer = createRuneContainer(rune, runeTree);
                 runeRow.append(runeContainer);
-                            
+
                 runeContainer.find('.rune').click(
                     function() {
                         $('.runeSelected').removeClass('runeSelected');
@@ -38,6 +38,13 @@ $(document).ready(function(){
                         $('#secondaryRunesHeader').removeClass('hidden');
                         var secondaryRuneIds = data[selectedPrimaryRune].pairings.map(function (p) { return p.perkId; });
                         createSecondaryRunes(secondaryRuneIds);
+
+                        // Make sure secondary runes are in view
+                        var bottom = $('#secondaryRunes').offset().top + $('#secondaryRunes').height();
+                        var windowBottom = $(window).height() + $("html").scrollTop();
+                        if (bottom > windowBottom + 10) {
+                            $("html").stop().animate({ scrollTop: $('#secondaryRunesHeader').offset().top - 20 });
+                        }
                     });
 
             });

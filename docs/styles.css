@@ -41,11 +41,6 @@ body {
     flex-wrap: wrap;
 }
 
-#secondaryRunes .rune.keystoneRune {
-    position: relative;
-    top: -7px;
-}
-
 .treeSelectorRow {
     display: flex;
     justify-content: center;
