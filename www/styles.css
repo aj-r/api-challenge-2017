@@ -182,6 +182,13 @@ h3 {
     text-align: center;
 }
 
+h5 {
+    color: grey;
+    text-align: center;
+    font-style: italic;
+    margin-top: -15px;
+}
+
 #about {
     margin-left: 15%;
     margin-right: 15%;
