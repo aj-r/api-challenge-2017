@@ -205,6 +205,13 @@ h5 {
     margin-top: 60px;
 }
 
+@media (max-width: 400px) {
+    #about {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
 .question {
     font-size: 150%;
 }
